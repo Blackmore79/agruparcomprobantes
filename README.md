@@ -4,21 +4,6 @@ Pasar de un pdf con una comprobantes de pago por pagina a un pdf con varias comp
 
 ### Instalar
 
-#### Requiere imagemagick 
-http://www.imagemagick.org
-
-en debian/ubuntu
-
-```sh
-$ wget http://www.imagemagick.org/download/ImageMagick.tar.gz
-$ tar -xvf ImageMagick.tar.gz
-$ cd ImageMagick-7.*
-$ ./configure
-$ make
-$ sudo make install
-$ sudo ldconfig /usr/local/lib
-```
-
 #### Clone Git
 
 ```sh
@@ -40,4 +25,22 @@ Opciones:
 
 f y c son opcionales y por default tiene valor 2
   
- 
+##### Requiere imagemagick 
+http://www.imagemagick.org
+
+en debian/ubuntu
+
+```sh
+$ wget http://www.imagemagick.org/download/ImageMagick.tar.gz
+$ tar -xvf ImageMagick.tar.gz
+$ cd ImageMagick-7.*
+$ ./configure
+$ make
+$ sudo make install
+$ sudo ldconfig /usr/local/lib
+```
+Probar si funciona
+
+```sh
+$ display
+```
