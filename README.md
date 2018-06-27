@@ -4,11 +4,19 @@ Script de Bash pasar de un pdf con una comprobantes de pago por pagina a un pdf 
 
 ### Instalar
 
-#### Instalar imagemagick 
+#### Requiere imagemagick 
 http://www.imagemagick.org
 
+en debian/ubuntu
+
 ```sh
-$ sudo apt install imagemagick
+$ wget http://www.imagemagick.org/download/ImageMagick.tar.gz
+$ tar -xvf ImageMagick.tar.gz
+$ cd ImageMagick-7.*
+$ ./configure
+$ make
+$ sudo make install
+$ sudo ldconfig /usr/local/lib
 ```
 
 #### Clone Git
