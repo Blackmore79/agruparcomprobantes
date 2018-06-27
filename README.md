@@ -1,6 +1,6 @@
 # Agrupar Comprobantes
 
-Script de Bash pasar de un pdf con una comprobantes de pago por pagina a un pdf con varias comprobantes por pagina.
+Pasar de un pdf con una comprobantes de pago por pagina a un pdf con varias comprobantes por pagina.
 
 ### Instalar
 
