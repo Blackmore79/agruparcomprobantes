@@ -1,21 +1,46 @@
 # Agrupar Comprobantes
 
-Script de Bash pasar de un pdf con una comprobantes de pago por pagina a un pdf con varias comprobantes por pagina.
+Pasar de un pdf con una comprobantes de pago por pagina a un pdf con varias comprobantes por pagina.
 
-#### Requiere imagemagick instalado en el equipo.
+### Instalar
 
-http://www.imagemagick.org
+#### Clone Git
 
-## Modo de uso:
+```sh
+$ git clone https://github.com/Blackmore79/agruparcomprobantes.git agruparcomprobantes && cd agruparcomprobantes
+```
 
-agruparcomprobantes.sh -c 2 -f 2 -i uno-comprobate-por-pagina.pdf -o cuatro-comprobantes-por-pagina.pdf
+### Modo de uso:
 
-- -h muestra esta ayuda
+```sh
+$ gruparcomprobantes.sh -c 2 -f 2 -i uno-comprobate-por-pagina.pdf -o cuatro-comprobantes-por-pagina.pdf
+```
+Opciones: 
+
+- -h muestra ayuda
 - -i pdf con comprobantes de pago
 - -o pdf con las comprobantes agrupados
 - -c elementos por clumna
-  Opcional
-  default 2
 - -f elementos por fila
-  Opcional
-  default 2
+
+f y c son opcionales y por default tiene valor 2
+  
+##### Requiere imagemagick 
+http://www.imagemagick.org
+
+en debian/ubuntu
+
+```sh
+$ wget http://www.imagemagick.org/download/ImageMagick.tar.gz
+$ tar -xvf ImageMagick.tar.gz
+$ cd ImageMagick-7.*
+$ ./configure
+$ make
+$ sudo make install
+$ sudo ldconfig /usr/local/lib
+```
+Probar si funciona
+
+```sh
+$ display
+```
