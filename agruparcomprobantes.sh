@@ -66,6 +66,8 @@ if [ ! -f $infile ]; then
     exit 1
 fi
 
+formato="$col""x""$row"
+
 echo $(date +%H:%M:%S) "- iniciando el proceso"
 
 echo $(date +%H:%M:%S) "- separando el DPF"
@@ -74,42 +76,34 @@ pdfseparate $infile $folder/p4g3-%d.pdf
 pdfs=$(find $folder -name "p4g3*.pdf" -print0 | sort -zV | xargs -r0 echo)
 
 ### Convertimos los PDF en JPG
-echo $(date +%H:%M:%S) "- pdf to jpg"
+echo $(date +%H:%M:%S) "- convirtiendo a imagenes"
 convert -density 150 -trim -quality 100 +repage $pdfs $folder/p4g3-%d.jpg
-
-
 
 ### Listamos los jpgs de forma ordenada
 jpgs=$(find $folder -name "p4g3*.jpg" -print0 | sort -zV | xargs -r0 echo)
 
 ### Listamos los jpgs de forma ordenada
-echo $(date +%H:%M:%S) "- pdf trim"
+echo $(date +%H:%M:%S) "- ajusntado el tamaño de las imagenes"
 #convert $pdfs -fuzz 50% -trim +repage $folder/p4g3-%d.jpg
 #mogrify -fuzz 10% -trim +repage $pdfs $folder/p4g3-%d.jpg
 listarray=($jpgs)
 for ((i = 0; i < ${#listarray[@]}; i++))
 do
-    mogrify -fuzz 10% -trim +repage ${listarray[$i]} ${listarray[$i]}
+    mogrify -fuzz 10% -trim +repage ${listarray[$i]} 
 
     w=$(identify -format "%w" ${listarray[$i]})
     h=$(identify -format "%h" ${listarray[$i]})
 
     if [ $w -gt 500 ]; then
       nh=$((h-50))
-      size="$w""x""$nh""+55+25"
-      convert -crop $size ${listarray[$i]} ${listarray[$i]}
-      mogrify -fuzz 10% -trim +repage ${listarray[$i]} ${listarray[$i]}
+      size="$w""x""$nh""+5+25"
+      mogrify -crop $size ${listarray[$i]}
+      mogrify -fuzz 10% -trim +repage ${listarray[$i]} 
     fi
 done
 
-### Cortamos las imagenes
-#echo $(date +%H:%M:%S) "- CROP CROP CROP"
-#convert -crop 456x598+76+72 $jpgs $folder/p4g3-%d.jpg
-
-formato="$col""x""$row"
-
 ### Montamos las imagenes en una pagina
-echo $(date +%H:%M:%S) "- Haciendo el collage"
+echo $(date +%H:%M:%S) "- haciendo el collage"
 montage  -mode Concatenate  -tile $formato -geometry +20+20 -background white $jpgs $folder/m0nt4g3.jpg
 
 ### Listamos los jpgs de forma ordenada
@@ -117,7 +111,7 @@ m=$(find $folder -name "m0nt4g3*.jpg" -print0 | sort -zV | xargs -r0 echo)
 
 ### convertimos las imagenes montadas en un pdf
 convert $m +compress $folder/$outfile
-echo $(date +%H:%M:%S) "- Limpiamos"
+echo $(date +%H:%M:%S) "- LImpiando..."
 rm $folder/p4g3*
 rm $folder/m0nt4g3*
 echo $(date +%H:%M:%S) "- Se genero el archivo $outfile"
